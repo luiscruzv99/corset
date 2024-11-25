@@ -9,7 +9,7 @@ const ctx = canvas.getContext('2d')
 
 async function compress_file(file){
     if (file['type'].split('/')[0] === 'image'){
-            const url = URL.createObjectURL(file)
+            let url = URL.createObjectURL(file)
             let img = new Image()
             img.src = url;
             await img.decode()
@@ -26,6 +26,7 @@ async function compress_file(file){
             
             img.src = ''
             img = null
+            url = null
         }
 }
 
