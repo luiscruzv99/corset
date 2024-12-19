@@ -9,32 +9,37 @@
         content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
     <title>Corset Image Compressor - Locally optimize your images</title>
     <link href="static/main.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="static/favicon.png" />
 </head>
 
 <body>
-    <script src="static/jszip.min.js"></script>
+    <div class="main-card">
+        <script src="static/jszip.min.js"></script>
 
-    <h1 class="title">Corset Image Compressor</h1>
-    <h2 class="subtitle">A bulk image compressor focused on privacy and ease of use</h2>
-
-    <div class="main-content">
-        <div id="function-selector" class="option-section">
-            <button class="slide-selector active" id="selector-folder">Entire Folder</button>
-            <button class="slide-selector" id="selector-files">Some Images</button>
+        <div class="title-section">
+            <h1 class="title">Corset Image Compressor</h1>
+            <h2 class="subtitle">A bulk image compressor focused on privacy and ease of use</h2>
         </div>
 
-        <div id="compression-options" class="option-section">
-            <select id="format-picker">
-                <option value="webp">Webp</option>
-                <option value="jpeg" selected>Jpeg</option>
-            </select>
-            <input id="compression-factor" value="0.8" type="number" min="0" max="1" step="0.01">
-        </div>
+        <div class="main-content">
+            <div id="function-selector" class="option-section">
+                <button class="slide-selector active" id="selector-folder">Entire Folder</button>
+                <button class="slide-selector" id="selector-files">Some Images</button>
+            </div>
 
-        <input type="file" id="upload-input" webkitdirectory multiple directory />
-        <button id="begin-compression" onclick="compress()" class="compress-button">Compress images</button>
+            <div id="compression-options" class="option-section">
+                <select id="format-picker">
+                    <option value="webp">Webp</option>
+                    <option value="jpeg" selected>Jpeg</option>
+                </select>
+                <input id="compression-factor" value="0.8" type="number" min="0" max="1" step="0.01">
+            </div>
 
-        <div class="info-container">
+            <input type="file" id="upload-input" webkitdirectory multiple directory />
+            <button id="begin-compression" onclick="compress()" class="compress-button">Compress images</button>
+
+            <div class="info-container">
+            </div>
         </div>
     </div>
     <script src="static/index.js"></script>

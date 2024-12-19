@@ -59,8 +59,9 @@ async function compress() {
     out_format = format_picker.value
     out_quality = parseFloat(quality_picker.value)
 
-    for (let file of Array.from(uploader_picker.files)) {
+    for (let [i,file] of Array.from(uploader_picker.files).entries()) {
         await compress_file(file)
+        console.log(i)
     }
 
     zip_file.generateAsync({
