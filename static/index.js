@@ -1,5 +1,7 @@
 console.log("Loaded compressor script")
 
+var modal = document.getElementById("myModal");
+var progress = document.getElementById("progress");
 const uploader_picker = document.querySelector('[type=file]')
 const folder_selector = document.getElementById('selector-folder')
 const files_selector = document.getElementById('selector-files')
@@ -11,13 +13,15 @@ let out_quality;
 
 const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
-const zip_file = new JSZip()
+let zip_file = null
 
 folder_selector.addEventListener('click', () => {
     uploader_picker.setAttribute("webkitdirectory", "")
     uploader_picker.setAttribute("directory", "")
     uploader_picker.removeAttribute("accept")
     uploader_picker.removeAttribute("multiple")
+    folder_selector.classList.add("active")
+    files_selector.classList.remove("active")
 })
 
 files_selector.addEventListener('click', () => {
@@ -25,6 +29,8 @@ files_selector.addEventListener('click', () => {
     uploader_picker.removeAttribute("directory", "")
     uploader_picker.setAttribute("accept", "image/*")
     uploader_picker.setAttribute("multiple", "")
+    folder_selector.classList.remove("active")
+    files_selector.classList.add("active")
 })
 
 async function compress_file(file) {
@@ -51,8 +57,13 @@ async function compress_file(file) {
 
 async function compress() {
 
+    zip_file = new JSZip()
+    modal.style.display = "block";
+    progress.textContent = `0/${uploader_picker.files.length}`;
+
     if (uploader_picker.files.length === 0) {
         console.log("No files to compress")
+        modal.style.display = "none";
         return
     }
 
@@ -60,8 +71,12 @@ async function compress() {
     out_quality = parseFloat(quality_picker.value)
 
     for (let [i,file] of Array.from(uploader_picker.files).entries()) {
+        try{
         await compress_file(file)
-        console.log(i)
+        }catch{
+            console.error(`Error procesando imagen ${file}`)
+        }
+        progress.textContent = `${i}/${uploader_picker.files.length}` 
     }
 
     zip_file.generateAsync({
@@ -72,7 +87,9 @@ async function compress() {
         link.href = URL.createObjectURL(data)
         link.download = 'compressed_imgs.zip'
         link.click()
+        modal.style.display = "none";
     })
+    zip_file = null;
 }
 
 
