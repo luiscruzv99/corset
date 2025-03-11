@@ -1,17 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="author" content="" />
-	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-	<title></title>
-	<link href="static/main.css" rel="stylesheet" />
-</head>
-<body>
-    <script src="static/jszip.min.js"></script>
-    <input type="file" id="upload-input" webkitdirectory multiple directory/>
 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta name="viewport"
+        content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+    <title>Corset Image Compressor - Locally optimize your images</title>
+    <link href="static/main.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="static/favicon.png" />
+</head>
+
+<body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p>Convirtiendo imagenes</p>
+            <p id="progress"></p>
+        </div>
+    </div>
+    <div class="main-card">
+        <script src="static/jszip.min.js"></script>
+
+        <div class="title-section">
+            <h1 class="title">Corset Image Compressor</h1>
+            <h2 class="subtitle">A bulk image compressor focused on privacy and ease of use</h2>
+        </div>
+
+        <div class="main-content">
+            <div id="function-selector" class="option-section">
+                <button class="slide-selector active" id="selector-folder">Entire Folder</button>
+                <button class="slide-selector" id="selector-files">Some Images</button>
+            </div>
+
+            <label for="compression-options">Output format and quality</label>
+            <div id="compression-options" class="option-section">
+                <select id="format-picker">
+                    <option value="webp">Webp</option>
+                    <option value="jpeg" selected>Jpeg</option>
+                </select>
+                <input id="compression-factor" value="0.8" type="number" min="0" max="1" step="0.01">
+            </div>
+
+            <div id="max-size-options" class="option-section">
+                <input id="max-file-check" type="checkbox">
+                <label for="max-file-check">Only compress files above: </label>
+                <input id="max-file" value="0" type="number" min="0" max="100" step="0.1">
+                <label for="max-file">MB</label>
+            </div>
+
+            <div class="option-section">
+                <label for="upload-input" id="upload-button">
+                    <a id="select-text">Select a folder</a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="149" height="132">
+                        <path
+                            d="M143.209,105.968c0,6.25-5.113,11.364-11.363,11.364H18.203c-6.25 0-11.363-5.113-11.363-11.364v-86.37c0-6.25,5.113-11.363 11.363-11.363h113.643c6.25,0,11.363,5.113,11.363,11.363V105.968z M18.203,17.326c-1.207,0-2.271,1.068-2.271,2.271v86.37c0,1.207,1.065 2.271,2.271,2.271h113.643c1.203,0,2.274-1.064 2.274-2.271v-86.37c0-1.203-1.071-2.271-2.274-2.271H18.203z M38.661,53.691c-7.529,0-13.641-6.108-13.641-13.635s6.112-13.638,13.641-13.638 c7.526,0,13.632,6.111,13.632,13.638S46.188,53.691,38.661,53.691z M125.025,99.15H25.02V85.51l22.73-22.724l11.363,11.36l36.365-36.361l29.547,29.547V99.15z" />
+                    </svg>
+                </label>
+                <input type="file" id="upload-input" webkitdirectory multiple directory />
+            </div>
+            <button id="begin-compression" onclick="compress()" class="compress-button">Compress images</button>
+        </div>
+    </div>
     <script src="static/index.js"></script>
 </body>
+
 </html>
