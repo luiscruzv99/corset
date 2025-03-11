@@ -24,7 +24,6 @@ h5 {
     margin-bottom: 0;
     width: 50vw;
     max-width: 768px;
-    height: 40vh;
     padding: 2rem 1rem;
     justify-content: space-between;
     align-items: center;
@@ -66,10 +65,12 @@ h5 {
 
 #function-selector {
     padding: 0;
-    margin: 1rem;
+    margin: 1rem 0;
     background-color: white;
     border-radius: 20px;
-    display: inline-block;
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-around;
 }
 
 .slide-selector {
@@ -78,6 +79,8 @@ h5 {
     color: black;
     border-radius: 20px;
     padding: 0.5rem;
+    width: 100%;
+    text-align: center;
 }
 
 .slide-selector.active {
@@ -85,7 +88,40 @@ h5 {
     background-color: #a6e3a1;
 }
 
-.active:before,
-.active:after {
-    transition: all 0.3s ease;
+#upload-input{
+    display: none;
+}
+
+#upload-button{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem 0.0rem;
+    padding: 2rem 0rem;
+    justify-content: center;
+    border: 3px solid #a6e3a144;
+    border-radius: 16px;
+}
+
+svg, path{
+    fill: #a6e3a1;
+    stroke: #a6e3a1;
+    opacity: 0.3;
+}
+
+.compress-button{
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin: 0.5rem;
+    padding: 0.25rem;
+    background-color: #a6e3a1;
+    color: #111115;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 16px;
+}
+
+.compress-button:hover{
+    background-color: #a6d189;
 }
