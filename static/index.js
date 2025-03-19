@@ -60,8 +60,7 @@ async function compress_file(file) {
             img = null
             url = null
         } else {
-            console.log(file)
-            await zip_file.file(`${file.name.split('.')[0]}.${out_format}`, file)
+            await zip_file.file(`${file.name}`, file)
         }
     }
 }
