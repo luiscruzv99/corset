@@ -2,6 +2,7 @@ console.log("Loaded compressor script")
 
 var modal = document.getElementById("myModal");
 var progress = document.getElementById("progress");
+var error_imgs = document.getElementById("errors");
 const uploader_picker = document.querySelector('[type=file]')
 const folder_selector = document.getElementById('selector-folder')
 const files_selector = document.getElementById('selector-files')
@@ -61,6 +62,7 @@ async function compress_file(file) {
             url = null
         } else {
             await zip_file.file(`${file.name}`, file)
+            console.log(file.name)
         }
     }
 }
@@ -83,11 +85,15 @@ async function compress() {
     out_format = format_picker.value
     out_quality = parseFloat(quality_picker.value)
 
+    let errors = 0
     for (let [i, file] of Array.from(uploader_picker.files).entries()) {
         try {
             await compress_file(file)
         } catch {
             console.error(`Error procesando imagen ${file}`)
+            await zip_file.file(`${file.name}`, file)
+            errors ++
+            error_imgs.textContent = `Imagenes saltadas por un error: ${errors}`
         }
         progress.textContent = `${i}/${uploader_picker.files.length}`
     }
